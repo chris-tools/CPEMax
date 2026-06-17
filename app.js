@@ -1,37 +1,80 @@
-const TOTE_ITEMS = {
+const CPE_ITEMS = {
+  "204376": {
+    name: "ONT-411",
+    type: "GPON ONT",
+    max: 10
+  },
+
   "213567": {
-    description: "ADTRAN SDX611 ONT 1GE C-Chip",
-    maxQty: 5
+    name: "ONT-611",
+    type: "GPON ONT",
+    max: 10
   },
 
   "214181": {
-    description: "ADTRAN SDX601QV, GPON 2.5G/1P",
-    maxQty: 5
+    name: "ONT-601",
+    type: "GPON ONT",
+    max: 10
+  },
+
+  "213155": {
+    name: "ONT-622",
+    type: "XGSPON ONT",
+    max: 12
   },
 
   "214152": {
-    description: "ONT, ADTRAN, 632 V Indoor XGS 10G/2.5",
-    maxQty: 12
+    name: "ONT-632",
+    type: "XGSPON ONT",
+    max: 12
+  },
+
+  "213380": {
+    name: "Modem-834",
+    type: "Gateway",
+    max: 22
   },
 
   "213484": {
-    description: "ADTRAN 854-6 DHCP",
-    maxQty: 10
+    name: "Modem-854",
+    type: "Gateway",
+    max: 22
+  },
+
+  "213850": {
+    name: "Modem-854 SOS",
+    type: "Gateway",
+    max: 22
   },
 
   "214595": {
-    description: "ADTRAN, SMARTOS, SDG 8612, Gtwy",
-    maxQty: 2
+    name: "Modem-8612 SOS",
+    type: "Gateway",
+    max: 22
   },
 
   "214278": {
-    description: "ADTRAN, Plume, SDG 8612 Gateway",
-    maxQty: 10
+    name: "Modem-8612",
+    type: "Gateway",
+    max: 22
+  },
+
+  "213865": {
+    name: "Extender-6E",
+    type: "Extender",
+    max: 11
+  },
+
+  "213320": {
+    name: "Extender-AX",
+    type: "Extender",
+    max: 11
   },
 
   "213264": {
-    description: "Adtran 841-T6 WIFI 6 MESH EXT",
-    maxQty: 11
+    name: "Extender-841",
+    type: "Extender",
+    max: 11
   }
 };
 
