@@ -137,9 +137,9 @@ generateBtn.addEventListener("click", () => {
 
     const counts = {};
 
-    Object.keys(TOTE_ITEMS).forEach(part => {
-      counts[part] = 0;
-    });
+Object.keys(CPE_ITEMS).forEach(part => {
+  counts[part] = 0;
+});
 
     for (let i = 1; i < lines.length; i++) {
 
