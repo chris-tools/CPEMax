@@ -233,23 +233,20 @@ Object.entries(categoryTotals).forEach(([category, data]) => {
   return;
 }
 
-   resultsDiv.innerHTML = `
+  resultsDiv.innerHTML = `
   <table class="pick-table">
     <thead>
       <tr>
-        <th>Part Number</th>
-        <th>Description</th>
-        <th>Qty</th>
+        <th>Category</th>
+        <th>Current</th>
+        <th>Max</th>
+        <th>Can Add</th>
       </tr>
     </thead>
     <tbody>
-      ${rows}
+      ${summaryRows}
     </tbody>
   </table>
-
-  <div class="pick-summary">
-    Total Pieces To Pick: ${totalPieces}
-  </div>
 `;
     printBtn.disabled = false;
 
