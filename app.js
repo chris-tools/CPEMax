@@ -157,7 +157,7 @@ Object.keys(CPE_ITEMS).forEach(part => {
         counts[partNumber]++;
       }
     }
-
+/*
     let rows = "";
     let totalPieces = 0;
 
@@ -180,16 +180,54 @@ Object.keys(CPE_ITEMS).forEach(part => {
       }
 
     });
+*/
 
-   if (!rows) {
+    let categoryTotals = {};
+Object.values(CPE_ITEMS).forEach(item => {
+
+  if (!categoryTotals[item.type]) {
+
+    categoryTotals[item.type] = {
+      current: 0,
+      max: item.max
+    };
+
+  }
+
+});
+
+    Object.entries(CPE_ITEMS).forEach(([partNumber, item]) => {
+
+  categoryTotals[item.type].current += counts[partNumber] || 0;
+
+});
+
+    let summaryRows = "";
+
+Object.entries(categoryTotals).forEach(([category, data]) => {
+
+  const canAdd = Math.max(0, data.max - data.current);
+
+  summaryRows += `
+    <tr>
+      <td>${category}</td>
+      <td>${data.current}</td>
+      <td>${data.max}</td>
+      <td>${canAdd}</td>
+    </tr>
+  `;
+
+});
+    
+   if (!summaryRows) {
 
   resultsDiv.innerHTML = `
-    <div class="result-item">
-      <div class="result-part">
-        Tote is fully stocked
-      </div>
+  <div class="result-item">
+    <div class="result-part">
+      No supported CPE found in inventory
     </div>
-  `;
+  </div>
+`;
 
   printBtn.disabled = true;
   return;
