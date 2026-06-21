@@ -302,6 +302,8 @@ printBtn.addEventListener("click", () => {
       minute: "2-digit"
     });
 
+    // Header
+
   doc.setFont("helvetica", "bold");
   doc.setFontSize(22);
   doc.text("CPE MAX WORKSHEET", 105, 20, { align: "center" });
@@ -311,21 +313,25 @@ printBtn.addEventListener("click", () => {
   doc.text("Tech Name:", 15, 35);
   doc.line(40, 35, 95, 35);
 
-  doc.text("Company:", 125, 35);
-  doc.line(150, 35, 200, 35);
+  doc.text("Company:", 120, 35);
+  doc.line(145, 35, 200, 35);
 
   doc.text(`Date: ${dateTime}`, 15, 48);
 
-  // Current Inventory Box
+  // =========================
+  // CURRENT INVENTORY
+  // =========================
 
-  doc.rect(15, 60, 80, 90);
+  const invX = 15;
+  const invY = 60;
+  const invW = 70;
+
+  doc.rect(invX, invY, invW, 70);
 
   doc.setFont("helvetica", "bold");
-  doc.text("CURRENT INVENTORY", 55, 70, { align: "center" });
+  doc.text("CURRENT INVENTORY", invX + 35, invY + 10, { align: "center" });
 
-  doc.line(15, 78, 95, 78);
-
-  doc.setFont("helvetica", "normal");
+  doc.line(invX, invY + 15, invX + invW, invY + 15);
 
   const inventoryRows = [
     ["GPON ONT", summaryData.gpon],
@@ -334,45 +340,40 @@ printBtn.addEventListener("click", () => {
     ["Extender", summaryData.extender]
   ];
 
-  let y = 95;
-
-inventoryRows.forEach(row => {
-
-  doc.text(row[0], 20, y);
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(18);
-  doc.text(String(row[1]), 80, y);
+  let invRowY = invY + 30;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(12);
 
-  y += 18;
-});
+  inventoryRows.forEach(([label, qty]) => {
 
-doc.line(15, y - 8, 95, y - 8);
+    doc.text(label, invX + 5, invRowY);
 
-doc.setFont("helvetica", "bold");
-doc.text("TOTAL", 20, y + 5);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+    doc.text(String(qty), invX + 55, invRowY);
 
-doc.setFontSize(18);
-doc.text(String(summaryData.total), 80, y + 5);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
 
-  // Requested / Filled
+    invRowY += 15;
+  });
 
-  const left = 102;
-  const top = 60;
-  const rowHeight = 16;
+  doc.line(invX, invY + 55, invX + invW, invY + 55);
 
-  doc.rect(left, top, 100, 160);
+  doc.setFont("helvetica", "bold");
+  doc.text("TOTAL", invX + 5, invY + 65);
+  doc.setFontSize(16);
+  doc.text(String(summaryData.total), invX + 55, invY + 65);
 
-  doc.line(left + 50, top, left + 50, 220);
+  // =========================
+  // REQUESTED / FILLED
+  // =========================
 
-  doc.line(left, top + 15, 202, top + 15);
-
-  doc.setFontSize(12);
-  doc.text("REQUESTED", left + 25, top + 10, { align: "center" });
-  doc.text("FILLED", left + 75, top + 10, { align: "center" });
+  const reqX = 95;
+  const reqY = 60;
+  const reqW = 107;
+  const rowHeight = 12;
 
   const items = [
     "611",
@@ -383,39 +384,50 @@ doc.text(String(summaryData.total), 80, y + 5);
     "841",
     "854",
     "8612",
-    "8612SOS"
+    "8612SOS",
+    "TOTAL QTY"
   ];
 
-  let rowY = top + 31;
+  const tableHeight = 15 + (items.length * rowHeight);
 
-  items.forEach(item => {
+  doc.rect(reqX, reqY, reqW, tableHeight);
 
-    doc.line(left, rowY - 8, 202, rowY - 8);
+  doc.line(reqX + 53.5, reqY, reqX + 53.5, reqY + tableHeight);
 
-    doc.text(item, left + 5, rowY);
+  doc.line(reqX, reqY + 15, reqX + reqW, reqY + 15);
+
+  doc.setFontSize(12);
+  doc.text("REQUESTED", reqX + 26.75, reqY + 10, { align: "center" });
+  doc.text("FILLED", reqX + 80, reqY + 10, { align: "center" });
+
+  let rowY = reqY + 27;
+
+  items.forEach((item, index) => {
+
+    if (index > 0) {
+      doc.line(reqX, rowY - 6, reqX + reqW, rowY - 6);
+    }
+
+    doc.text(item, reqX + 5, rowY);
 
     rowY += rowHeight;
   });
 
-  doc.line(left, rowY - 8, 202, rowY - 8);
+  // =========================
+  // NOTES
+  // =========================
 
-  doc.line(left + 50, rowY - 8, left + 50, rowY + 8);
+  const notesY = reqY + tableHeight + 12;
+
+  doc.rect(15, notesY, 187, 42);
 
   doc.setFont("helvetica", "bold");
-  doc.text("TOTAL QTY", left + 5, rowY + 4);
-
-  doc.rect(left, top, 100, (rowY + 8) - top);
-
-  // Notes
-
-  doc.rect(15, 228, 187, 40);
-
   doc.setFontSize(12);
-  doc.text("Notes:", 18, 238);
+  doc.text("Notes:", 18, notesY + 10);
 
-  doc.line(18, 248, 195, 248);
-  doc.line(18, 258, 195, 258);
-  doc.line(18, 268, 195, 268);
+  doc.line(18, notesY + 18, 195, notesY + 18);
+  doc.line(18, notesY + 28, 195, notesY + 28);
+  doc.line(18, notesY + 38, 195, notesY + 38);
 
   doc.output("dataurlnewwindow");
 
