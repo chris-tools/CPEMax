@@ -403,7 +403,7 @@ doc.text(String(summaryData.total), invX + 55, invY + 87);
   doc.text("REQUESTED", reqX + 26.75, reqY + 10, { align: "center" });
   doc.text("FILLED", reqX + 80, reqY + 10, { align: "center" });
 
-  let rowY = reqY + 27;
+  let rowY = reqY + 21;
 
   items.forEach((item, index) => {
 
@@ -416,7 +416,9 @@ doc.text(String(summaryData.total), invX + 55, invY + 87);
 
 doc.line(reqX, rowY - 6, reqX + reqW, rowY - 6);
 
-doc.text("TOTAL QTY", reqX + 5, rowY);
+doc.line(reqX, rowY - 6, reqX + reqW, rowY - 6);
+
+doc.text("TOTAL QTY", reqX + 5, rowY + 6);
 
 rowY += rowHeight;
 
