@@ -132,7 +132,7 @@ button:disabled {
   background: rgba(0, 0, 0, 0.25);
   padding: 12px;
   text-align: left;
-  font-weight: 700;
+  font-weight: 10;
 }
 
 .pick-table td {
