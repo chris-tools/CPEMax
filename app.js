@@ -283,5 +283,173 @@ summaryRows += `
 });
 
 printBtn.addEventListener("click", () => {
-  window.print();
+
+  if (!summaryData) return;
+
+  const now = new Date();
+
+  const dateTime = now.toLocaleString();
+
+  const pdfWindow = window.open("", "_blank");
+
+  pdfWindow.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+<title>CPE MAX Worksheet</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  color: black;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-wrap {
+  display: flex;
+  gap: 30px;
+  margin-top: 25px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.inventory-table {
+  width: 40%;
+}
+
+.request-table {
+  width: 60%;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.inventory-table td {
+  height: 40px;
+}
+
+.request-table td {
+  height: 42px;
+}
+
+.notes {
+  margin-top: 30px;
+}
+
+.notes-line {
+  border-bottom: 1px solid black;
+  height: 28px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>CPE MAX WORKSHEET</h1>
+
+<div class="header-row">
+  <div>
+    <strong>Tech Name:</strong>
+    ______________________
+  </div>
+
+  <div>
+    <strong>Company:</strong>
+    ______________________
+  </div>
+</div>
+
+<div style="margin-bottom:20px;">
+  <strong>Date:</strong> ${dateTime}
+</div>
+
+<div class="section-wrap">
+
+<table class="inventory-table">
+<tr>
+  <th colspan="2">CURRENT INVENTORY</th>
+</tr>
+
+<tr>
+  <td>GPON ONT</td>
+  <td>${summaryData.gpon}</td>
+</tr>
+
+<tr>
+  <td>XGSPON ONT</td>
+  <td>${summaryData.xgspon}</td>
+</tr>
+
+<tr>
+  <td>Gateway</td>
+  <td>${summaryData.gateway}</td>
+</tr>
+
+<tr>
+  <td>Extender</td>
+  <td>${summaryData.extender}</td>
+</tr>
+
+<tr>
+  <td><strong>TOTAL</strong></td>
+  <td><strong>${summaryData.total}</strong></td>
+</tr>
+
+</table>
+
+<table class="request-table">
+
+<tr>
+  <th>REQUESTED</th>
+  <th>FILLED</th>
+</tr>
+
+<tr><td>611</td><td></td></tr>
+<tr><td>601</td><td></td></tr>
+<tr><td>622</td><td></td></tr>
+<tr><td>632</td><td></td></tr>
+<tr><td>834</td><td></td></tr>
+<tr><td>841</td><td></td></tr>
+<tr><td>854</td><td></td></tr>
+<tr><td>8612</td><td></td></tr>
+<tr><td>8612SOS</td><td></td></tr>
+
+<tr>
+  <td><strong>TOTAL QTY</strong></td>
+  <td></td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="notes">
+  <strong>Notes:</strong>
+
+  <div class="notes-line"></div>
+  <div class="notes-line"></div>
+  <div class="notes-line"></div>
+</div>
+
+</body>
+</html>
+`);
+
+  pdfWindow.document.close();
+
 });
