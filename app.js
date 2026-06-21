@@ -236,17 +236,18 @@ summaryRows += `
     <td>${totalCanAdd}</td>
   </tr>
 `;
-    
-   if (!summaryRows) {
 
-     summaryData = {
+    summaryData = {
   gpon: categoryTotals["GPON ONT"]?.current || 0,
   xgspon: categoryTotals["XGSPON ONT"]?.current || 0,
   gateway: categoryTotals["Gateway"]?.current || 0,
   extender: categoryTotals["Extender"]?.current || 0,
   total: totalCurrent
 };
-     
+    
+   if (!summaryRows) {
+
+        
   resultsDiv.innerHTML = `
   <div class="result-item">
     <div class="result-part">
