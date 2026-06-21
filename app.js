@@ -341,7 +341,7 @@ doc.rect(invX, invY, invW, invH);
     ["Extender", summaryData.extender]
   ];
 
-  let invRowY = invY + 28;
+  let invRowY = invY + 24;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(12);
@@ -386,9 +386,9 @@ doc.text(String(summaryData.total), invX + 55, invY + 87);
     "834",
     "841",
     "854",
+    "854SOS",
     "8612",
     "8612SOS",
-    "TOTAL QTY"
   ];
 
   const tableHeight = 15 + ((items.length + 1) * rowHeight);
