@@ -131,7 +131,7 @@ button:disabled {
 .pick-table th {
   background: rgba(0, 0, 0, 0.25);
   padding: 12px;
-  text-align: left;
+  text-align: center;
   font-weight: 10;
 }
 
@@ -147,7 +147,7 @@ button:disabled {
 .pick-table th:last-child,
 .pick-table td:last-child {
   text-align: center;
-  width: 400px;
+  width: 80px;
   font-weight: 700;
   font-size: 1.15rem;
 }
