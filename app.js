@@ -307,61 +307,110 @@ printBtn.addEventListener("click", () => {
 <title>CPE MAX Worksheet</title>
 
 <style>
-body {
+body{
   font-family: Arial, sans-serif;
-  padding: 20px;
-  color: black;
+  color:#000;
+  margin:30px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 25px;
+h1{
+  text-align:center;
+  font-size:32px;
+  margin-bottom:30px;
 }
 
-.header-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
+.header{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:18px;
+  font-size:18px;
+  font-weight:bold;
 }
 
-.section-wrap {
-  display: flex;
-  gap: 30px;
-  margin-top: 25px;
+.date-row{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:30px;
 }
 
-table {
-  border-collapse: collapse;
+.main{
+  display:flex;
+  gap:30px;
+  align-items:flex-start;
 }
 
-.inventory-table {
-  width: 40%;
+table{
+  border-collapse:collapse;
 }
 
-.request-table {
-  width: 60%;
+.inventory-table{
+  width:42%;
 }
 
-th, td {
-  border: 1px solid black;
-  padding: 10px;
+.request-table{
+  width:58%;
 }
 
-.inventory-table td {
-  height: 40px;
+.inventory-table th,
+.request-table th{
+  border:2px solid #000;
+  padding:12px;
+  text-align:center;
+  font-size:18px;
 }
 
-.request-table td {
-  height: 42px;
+.inventory-table td{
+  border:2px solid #000;
+  padding:18px;
+  font-size:20px;
 }
 
-.notes {
-  margin-top: 30px;
+.inventory-table td:last-child{
+  width:90px;
+  text-align:center;
+  font-weight:bold;
+  font-size:24px;
 }
 
-.notes-line {
-  border-bottom: 1px solid black;
-  height: 28px;
+.request-table td{
+  border:2px solid #000;
+  padding:14px;
+  height:58px;
+  font-size:18px;
+}
+
+.request-table td:first-child{
+  width:50%;
+  font-weight:bold;
+}
+
+.request-table td:last-child{
+  width:50%;
+}
+
+.total-row{
+  font-weight:bold;
+}
+
+.notes{
+  margin-top:25px;
+}
+
+.notes-title{
+  font-weight:bold;
+  margin-bottom:10px;
+  font-size:18px;
+}
+
+.notes-box{
+  border:2px solid #000;
+  padding:12px;
+}
+
+.note-line{
+  border-bottom:2px solid #000;
+  height:34px;
+  margin-bottom:12px;
 }
 </style>
 
@@ -370,25 +419,24 @@ th, td {
 
 <h1>CPE MAX WORKSHEET</h1>
 
-<div class="header-row">
+<div class="header">
   <div>
-    <strong>Tech Name:</strong>
-    ______________________
+    Tech Name: ________________________
   </div>
 
   <div>
-    <strong>Company:</strong>
-    ______________________
+    Company: ________________________
   </div>
 </div>
 
-<div style="margin-bottom:20px;">
-  <strong>Date:</strong> ${dateTime}
+<div class="date-row">
+  Date: ${dateTime}
 </div>
 
-<div class="section-wrap">
+<div class="main">
 
 <table class="inventory-table">
+
 <tr>
   <th colspan="2">CURRENT INVENTORY</th>
 </tr>
@@ -413,9 +461,9 @@ th, td {
   <td>${summaryData.extender}</td>
 </tr>
 
-<tr>
-  <td><strong>TOTAL</strong></td>
-  <td><strong>${summaryData.total}</strong></td>
+<tr class="total-row">
+  <td>TOTAL</td>
+  <td>${summaryData.total}</td>
 </tr>
 
 </table>
@@ -437,8 +485,8 @@ th, td {
 <tr><td>8612</td><td></td></tr>
 <tr><td>8612SOS</td><td></td></tr>
 
-<tr>
-  <td><strong>TOTAL QTY</strong></td>
+<tr class="total-row">
+  <td>TOTAL QTY</td>
   <td></td>
 </tr>
 
@@ -447,11 +495,18 @@ th, td {
 </div>
 
 <div class="notes">
-  <strong>Notes:</strong>
 
-  <div class="notes-line"></div>
-  <div class="notes-line"></div>
-  <div class="notes-line"></div>
+  <div class="notes-title">
+    Notes:
+  </div>
+
+  <div class="notes-box">
+    <div class="note-line"></div>
+    <div class="note-line"></div>
+    <div class="note-line"></div>
+    <div class="note-line"></div>
+  </div>
+
 </div>
 
 </body>
