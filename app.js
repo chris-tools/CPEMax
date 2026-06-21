@@ -85,6 +85,7 @@ const generateBtn = document.getElementById("generateBtn");
 const printBtn = document.getElementById("printBtn");
 
 let selectedFile = null;
+let summaryData = null;
 
 function setLoadedFile(file) {
   selectedFile = file;
@@ -238,6 +239,14 @@ summaryRows += `
     
    if (!summaryRows) {
 
+     summaryData = {
+  gpon: categoryTotals["GPON ONT"]?.current || 0,
+  xgspon: categoryTotals["XGSPON ONT"]?.current || 0,
+  gateway: categoryTotals["Gateway"]?.current || 0,
+  extender: categoryTotals["Extender"]?.current || 0,
+  total: totalCurrent
+};
+     
   resultsDiv.innerHTML = `
   <div class="result-item">
     <div class="result-part">
