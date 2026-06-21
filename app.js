@@ -289,7 +289,14 @@ printBtn.addEventListener("click", () => {
 
   const now = new Date();
 
-  const dateTime = now.toLocaleString();
+  const dateTime =
+  String(now.getMonth() + 1).padStart(2, "0") + "/" +
+  String(now.getDate()).padStart(2, "0") + "/" +
+  now.getFullYear() + "  " +
+  now.toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit"
+  });
 
   const pdfWindow = window.open("", "_blank");
 
