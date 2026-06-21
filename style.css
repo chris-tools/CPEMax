@@ -147,7 +147,7 @@ button:disabled {
 .pick-table th:last-child,
 .pick-table td:last-child {
   text-align: center;
-  width: 60px;
+  width: 10px;
   font-weight: 700;
   font-size: 1.15rem;
 }
