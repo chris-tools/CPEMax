@@ -156,3 +156,25 @@ button:disabled {
   font-size: 1.15rem;
   font-weight: 700;
 }
+.max-col {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.can-add {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #4ade80;
+}
+
+.can-add-zero {
+  font-weight: 700;
+  font-size: 1.15rem;
+  opacity: 0.5;
+}
+
+.totals-row td {
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-top: 2px solid rgba(255,255,255,0.25);
+}
