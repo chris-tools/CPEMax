@@ -253,13 +253,13 @@ summaryRows += `
   resultsDiv.innerHTML = `
   <table class="pick-table">
     <thead>
-      <tr>
-        <th>Category</th>
-        <th>Current</th>
-        <th>Max</th>
-        <th>Can Add</th>
-      </tr>
-    </thead>
+  <tr>
+    <th>Category</th>
+    <th>Max</th>
+    <th>Current</th>
+    <th>Can Add</th>
+  </tr>
+</thead>
     <tbody>
       ${summaryRows}
     </tbody>
