@@ -336,26 +336,27 @@ printBtn.addEventListener("click", () => {
 
   let y = 95;
 
-  inventoryRows.forEach(row => {
+inventoryRows.forEach(row => {
 
-    doc.text(row[0], 20, y);
-
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(18);
-    doc.text(String(row[1]), 80, y);
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(12);
-
-    y += 18;
-  });
-
-  doc.line(15, 132, 95, 132);
+  doc.text(row[0], 20, y);
 
   doc.setFont("helvetica", "bold");
-  doc.text("TOTAL", 20, 143);
   doc.setFontSize(18);
-  doc.text(String(summaryData.total), 80, 143);
+  doc.text(String(row[1]), 80, y);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(12);
+
+  y += 18;
+});
+
+doc.line(15, y - 8, 95, y - 8);
+
+doc.setFont("helvetica", "bold");
+doc.text("TOTAL", 20, y + 5);
+
+doc.setFontSize(18);
+doc.text(String(summaryData.total), 80, y + 5);
 
   // Requested / Filled
 
@@ -398,8 +399,12 @@ printBtn.addEventListener("click", () => {
 
   doc.line(left, rowY - 8, 202, rowY - 8);
 
+  doc.line(left + 50, rowY - 8, left + 50, rowY + 8);
+
   doc.setFont("helvetica", "bold");
-  doc.text("TOTAL QTY", left + 5, rowY + 8);
+  doc.text("TOTAL QTY", left + 5, rowY + 4);
+
+  doc.rect(left, top, 100, (rowY + 8) - top);
 
   // Notes
 
