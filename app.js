@@ -325,8 +325,9 @@ printBtn.addEventListener("click", () => {
   const invX = 15;
   const invY = 60;
   const invW = 70;
+  const invH = 95;
 
-  doc.rect(invX, invY, invW, 70);
+doc.rect(invX, invY, invW, invH);
 
   doc.setFont("helvetica", "bold");
   doc.text("CURRENT INVENTORY", invX + 35, invY + 10, { align: "center" });
@@ -340,7 +341,7 @@ printBtn.addEventListener("click", () => {
     ["Extender", summaryData.extender]
   ];
 
-  let invRowY = invY + 30;
+  let invRowY = invY + 28;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(12);
@@ -359,12 +360,14 @@ printBtn.addEventListener("click", () => {
     invRowY += 15;
   });
 
-  doc.line(invX, invY + 55, invX + invW, invY + 55);
+  doc.line(invX, invY + 75, invX + invW, invY + 75);
 
-  doc.setFont("helvetica", "bold");
-  doc.text("TOTAL", invX + 5, invY + 65);
-  doc.setFontSize(16);
-  doc.text(String(summaryData.total), invX + 55, invY + 65);
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text("TOTAL", invX + 5, invY + 87);
+
+doc.setFontSize(16);
+doc.text(String(summaryData.total), invX + 55, invY + 87);
 
   // =========================
   // REQUESTED / FILLED
@@ -388,7 +391,7 @@ printBtn.addEventListener("click", () => {
     "TOTAL QTY"
   ];
 
-  const tableHeight = 15 + (items.length * rowHeight);
+  const tableHeight = 15 + ((items.length + 1) * rowHeight);
 
   doc.rect(reqX, reqY, reqW, tableHeight);
 
@@ -404,14 +407,18 @@ printBtn.addEventListener("click", () => {
 
   items.forEach((item, index) => {
 
-    if (index > 0) {
-      doc.line(reqX, rowY - 6, reqX + reqW, rowY - 6);
-    }
+  doc.line(reqX, rowY - 6, reqX + reqW, rowY - 6);
 
-    doc.text(item, reqX + 5, rowY);
+  doc.text(item, reqX + 5, rowY);
 
-    rowY += rowHeight;
-  });
+  rowY += rowHeight;
+});
+
+doc.line(reqX, rowY - 6, reqX + reqW, rowY - 6);
+
+doc.text("TOTAL QTY", reqX + 5, rowY);
+
+rowY += rowHeight;
 
   // =========================
   // NOTES
@@ -424,10 +431,6 @@ printBtn.addEventListener("click", () => {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12);
   doc.text("Notes:", 18, notesY + 10);
-
-  doc.line(18, notesY + 18, 195, notesY + 18);
-  doc.line(18, notesY + 28, 195, notesY + 28);
-  doc.line(18, notesY + 38, 195, notesY + 38);
 
   doc.output("dataurlnewwindow");
 
