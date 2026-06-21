@@ -202,22 +202,39 @@ Object.values(CPE_ITEMS).forEach(item => {
 
 });
 
-    let summaryRows = "";
+   let summaryRows = "";
+
+let totalMax = 0;
+let totalCurrent = 0;
+let totalCanAdd = 0;
 
 Object.entries(categoryTotals).forEach(([category, data]) => {
 
   const canAdd = Math.max(0, data.max - data.current);
 
+  totalMax += data.max;
+  totalCurrent += data.current;
+  totalCanAdd += canAdd;
+
   summaryRows += `
     <tr>
       <td>${category}</td>
+      <td class="max-col">${data.max}</td>
       <td>${data.current}</td>
-      <td>${data.max}</td>
-      <td>${canAdd}</td>
+      <td class="${canAdd > 0 ? "can-add" : "can-add-zero"}">${canAdd}</td>
     </tr>
   `;
 
 });
+
+summaryRows += `
+  <tr class="totals-row">
+    <td>TOTAL</td>
+    <td>${totalMax}</td>
+    <td>${totalCurrent}</td>
+    <td>${totalCanAdd}</td>
+  </tr>
+`;
     
    if (!summaryRows) {
 
