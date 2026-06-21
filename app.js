@@ -389,6 +389,7 @@ doc.text(String(summaryData.total), invX + 55, invY + 87);
     "854SOS",
     "8612",
     "8612SOS",
+    "TOTAL QTY",
   ];
 
   const tableHeight = 15 + (items.length * rowHeight);
@@ -409,7 +410,13 @@ doc.text(String(summaryData.total), invX + 55, invY + 87);
 
   doc.line(reqX, rowY - 6, reqX + reqW, rowY - 6);
 
-  doc.text(item, reqX + 5, rowY);
+if (item === "TOTAL QTY") {
+  doc.setFont("helvetica", "bold");
+}
+
+doc.text(item, reqX + 5, rowY);
+
+doc.setFont("helvetica", "normal");
 
   rowY += rowHeight;
 });
