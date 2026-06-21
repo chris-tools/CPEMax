@@ -287,232 +287,131 @@ printBtn.addEventListener("click", () => {
 
   if (!summaryData) return;
 
+  const { jsPDF } = window.jspdf;
+
+  const doc = new jsPDF("p", "mm", "letter");
+
   const now = new Date();
 
   const dateTime =
-  String(now.getMonth() + 1).padStart(2, "0") + "/" +
-  String(now.getDate()).padStart(2, "0") + "/" +
-  now.getFullYear() + "  " +
-  now.toLocaleTimeString([], {
-    hour: "numeric",
-    minute: "2-digit"
+    String(now.getMonth() + 1).padStart(2, "0") + "/" +
+    String(now.getDate()).padStart(2, "0") + "/" +
+    now.getFullYear() + "  " +
+    now.toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "2-digit"
+    });
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(22);
+  doc.text("CPE MAX WORKSHEET", 105, 20, { align: "center" });
+
+  doc.setFontSize(12);
+
+  doc.text("Tech Name:", 15, 35);
+  doc.line(40, 35, 95, 35);
+
+  doc.text("Company:", 125, 35);
+  doc.line(150, 35, 200, 35);
+
+  doc.text(`Date: ${dateTime}`, 15, 48);
+
+  // Current Inventory Box
+
+  doc.rect(15, 60, 80, 90);
+
+  doc.setFont("helvetica", "bold");
+  doc.text("CURRENT INVENTORY", 55, 70, { align: "center" });
+
+  doc.line(15, 78, 95, 78);
+
+  doc.setFont("helvetica", "normal");
+
+  const inventoryRows = [
+    ["GPON ONT", summaryData.gpon],
+    ["XGSPON ONT", summaryData.xgspon],
+    ["Gateway", summaryData.gateway],
+    ["Extender", summaryData.extender]
+  ];
+
+  let y = 95;
+
+  inventoryRows.forEach(row => {
+
+    doc.text(row[0], 20, y);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.text(String(row[1]), 80, y);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+
+    y += 18;
   });
 
-  const pdfWindow = window.open("", "_blank");
+  doc.line(15, 132, 95, 132);
 
-  pdfWindow.document.write(`
-<!DOCTYPE html>
-<html>
-<head>
-<title>CPE MAX Worksheet</title>
+  doc.setFont("helvetica", "bold");
+  doc.text("TOTAL", 20, 143);
+  doc.setFontSize(18);
+  doc.text(String(summaryData.total), 80, 143);
 
-<style>
-body{
-  font-family: Arial, sans-serif;
-  color:#000;
-  margin:30px;
-}
+  // Requested / Filled
 
-h1{
-  text-align:center;
-  font-size:32px;
-  margin-bottom:30px;
-}
+  const left = 102;
+  const top = 60;
+  const rowHeight = 16;
 
-.header{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:18px;
-  font-size:18px;
-  font-weight:bold;
-}
+  doc.rect(left, top, 100, 160);
 
-.date-row{
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:30px;
-}
+  doc.line(left + 50, top, left + 50, 220);
 
-.main{
-  display:flex;
-  gap:30px;
-  align-items:flex-start;
-}
+  doc.line(left, top + 15, 202, top + 15);
 
-table{
-  border-collapse:collapse;
-}
+  doc.setFontSize(12);
+  doc.text("REQUESTED", left + 25, top + 10, { align: "center" });
+  doc.text("FILLED", left + 75, top + 10, { align: "center" });
 
-.inventory-table{
-  width:42%;
-}
+  const items = [
+    "611",
+    "601",
+    "622",
+    "632",
+    "834",
+    "841",
+    "854",
+    "8612",
+    "8612SOS"
+  ];
 
-.request-table{
-  width:58%;
-}
+  let rowY = top + 31;
 
-.inventory-table th,
-.request-table th{
-  border:2px solid #000;
-  padding:12px;
-  text-align:center;
-  font-size:18px;
-}
+  items.forEach(item => {
 
-.inventory-table td{
-  border:2px solid #000;
-  padding:18px;
-  font-size:20px;
-}
+    doc.line(left, rowY - 8, 202, rowY - 8);
 
-.inventory-table td:last-child{
-  width:90px;
-  text-align:center;
-  font-weight:bold;
-  font-size:24px;
-}
+    doc.text(item, left + 5, rowY);
 
-.request-table td{
-  border:2px solid #000;
-  padding:14px;
-  height:58px;
-  font-size:18px;
-}
+    rowY += rowHeight;
+  });
 
-.request-table td:first-child{
-  width:50%;
-  font-weight:bold;
-}
+  doc.line(left, rowY - 8, 202, rowY - 8);
 
-.request-table td:last-child{
-  width:50%;
-}
+  doc.setFont("helvetica", "bold");
+  doc.text("TOTAL QTY", left + 5, rowY + 8);
 
-.total-row{
-  font-weight:bold;
-}
+  // Notes
 
-.notes{
-  margin-top:25px;
-}
+  doc.rect(15, 228, 187, 40);
 
-.notes-title{
-  font-weight:bold;
-  margin-bottom:10px;
-  font-size:18px;
-}
+  doc.setFontSize(12);
+  doc.text("Notes:", 18, 238);
 
-.notes-box{
-  border:2px solid #000;
-  padding:12px;
-}
+  doc.line(18, 248, 195, 248);
+  doc.line(18, 258, 195, 258);
+  doc.line(18, 268, 195, 268);
 
-.note-line{
-  border-bottom:2px solid #000;
-  height:34px;
-  margin-bottom:12px;
-}
-</style>
-
-</head>
-<body>
-
-<h1>CPE MAX WORKSHEET</h1>
-
-<div class="header">
-  <div>
-    Tech Name: ________________________
-  </div>
-
-  <div>
-    Company: ________________________
-  </div>
-</div>
-
-<div class="date-row">
-  Date: ${dateTime}
-</div>
-
-<div class="main">
-
-<table class="inventory-table">
-
-<tr>
-  <th colspan="2">CURRENT INVENTORY</th>
-</tr>
-
-<tr>
-  <td>GPON ONT</td>
-  <td>${summaryData.gpon}</td>
-</tr>
-
-<tr>
-  <td>XGSPON ONT</td>
-  <td>${summaryData.xgspon}</td>
-</tr>
-
-<tr>
-  <td>Gateway</td>
-  <td>${summaryData.gateway}</td>
-</tr>
-
-<tr>
-  <td>Extender</td>
-  <td>${summaryData.extender}</td>
-</tr>
-
-<tr class="total-row">
-  <td>TOTAL</td>
-  <td>${summaryData.total}</td>
-</tr>
-
-</table>
-
-<table class="request-table">
-
-<tr>
-  <th>REQUESTED</th>
-  <th>FILLED</th>
-</tr>
-
-<tr><td>611</td><td></td></tr>
-<tr><td>601</td><td></td></tr>
-<tr><td>622</td><td></td></tr>
-<tr><td>632</td><td></td></tr>
-<tr><td>834</td><td></td></tr>
-<tr><td>841</td><td></td></tr>
-<tr><td>854</td><td></td></tr>
-<tr><td>8612</td><td></td></tr>
-<tr><td>8612SOS</td><td></td></tr>
-
-<tr class="total-row">
-  <td>TOTAL QTY</td>
-  <td></td>
-</tr>
-
-</table>
-
-</div>
-
-<div class="notes">
-
-  <div class="notes-title">
-    Notes:
-  </div>
-
-  <div class="notes-box">
-    <div class="note-line"></div>
-    <div class="note-line"></div>
-    <div class="note-line"></div>
-    <div class="note-line"></div>
-  </div>
-
-</div>
-
-</body>
-</html>
-`);
-
-  pdfWindow.document.close();
+  doc.output("dataurlnewwindow");
 
 });
