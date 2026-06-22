@@ -408,6 +408,8 @@ doc.text(String(summaryData.total), invX + 55, invY + 87);
 
   items.forEach((item, index) => {
 
+    doc.setFont("helvetica", "normal");
+
   doc.line(reqX, rowY - 6, reqX + reqW, rowY - 6);
 
 if (item === "TOTAL QTY") {
@@ -416,12 +418,15 @@ if (item === "TOTAL QTY") {
 
 doc.text(item, reqX + 5, rowY);
 
-// Small L-shaped marker
-const markerRight = reqX + 28;
-const markerBottom = rowY + 2;
+if (item !== "TOTAL QTY") {
 
-doc.line(markerRight, rowY - 6, markerRight, markerBottom);
-doc.line(reqX + 5, markerBottom, markerRight, markerBottom);
+  const markerRight = reqX + 18;
+  const markerBottom = rowY + 2;
+
+  doc.line(markerRight, rowY - 6, markerRight, markerBottom);
+  doc.line(reqX + 5, markerBottom, markerRight, markerBottom);
+
+}
 
 doc.setFont("helvetica", "normal");
 
