@@ -306,7 +306,7 @@ printBtn.addEventListener("click", () => {
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(22);
-  doc.text("CPE MAX WORKSHEET", 105, 20, { align: "center" });
+  doc.text("CPE ORDER", 80, 20, { align: "center" });
 
   doc.setFontSize(12);
 
