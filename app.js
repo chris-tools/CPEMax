@@ -330,16 +330,16 @@ printBtn.addEventListener("click", () => {
 doc.rect(invX, invY, invW, invH);
 
   doc.setFont("helvetica", "bold");
-  doc.text("CURRENT INVENTORY", invX + 35, invY + 10, { align: "center" });
+  doc.text("MAX ALLOWED", invX + 35, invY + 10, { align: "center" });
 
   doc.line(invX, invY + 15, invX + invW, invY + 15);
 
-  const inventoryRows = [
-    ["GPON ONT", summaryData.gpon],
-    ["XGSPON ONT", summaryData.xgspon],
-    ["Gateway", summaryData.gateway],
-    ["Extender", summaryData.extender]
-  ];
+ const inventoryRows = [
+  ["GPON ONT", 10],
+  ["XGSPON ONT", 12],
+  ["Gateway", 22],
+  ["Extender", 11]
+];
 
   let invRowY = invY + 24;
 
@@ -367,7 +367,7 @@ doc.setFontSize(12);
 doc.text("TOTAL", invX + 5, invY + 87);
 
 doc.setFontSize(16);
-doc.text(String(summaryData.total), invX + 55, invY + 87);
+doc.text("55", invX + 55, invY + 87);
 
   // =========================
   // REQUESTED / FILLED
