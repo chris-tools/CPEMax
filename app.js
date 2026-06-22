@@ -423,13 +423,6 @@ doc.setFont("helvetica", "normal");
 
 doc.line(reqX, rowY - 6, reqX + reqW, rowY - 6);
 
-doc.line(reqX, rowY - 6, reqX + reqW, rowY - 6);
-
-doc.setFont("helvetica", "bold");
-doc.text("TOTAL QTY", reqX + 5, rowY + 6);
-
-doc.line(reqX + 53.5, rowY - 6, reqX + 53.5, rowY + 6);
-
   // =========================
   // NOTES
   // =========================
