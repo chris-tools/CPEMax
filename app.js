@@ -420,7 +420,8 @@ doc.text(item, reqX + 5, rowY);
 
 if (item !== "TOTAL QTY") {
 
-  const markerRight = reqX + 18;
+  const textWidth = doc.getTextWidth(item);
+  const markerRight = reqX + 7 + textWidth + 3;
   const markerBottom = rowY + 2;
 
   doc.line(markerRight, rowY - 6, markerRight, markerBottom);
