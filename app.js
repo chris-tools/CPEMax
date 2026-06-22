@@ -384,11 +384,11 @@ doc.text(String(summaryData.total), invX + 55, invY + 87);
     "622",
     "632",
     "834",
-    "841",
     "854",
     "854SOS",
     "8612",
     "8612SOS",
+    "841",
     "TOTAL QTY",
   ];
 
@@ -421,7 +421,7 @@ doc.text(item, reqX + 5, rowY);
 if (item !== "TOTAL QTY") {
 
   const textWidth = doc.getTextWidth(item);
-  const markerRight = reqX + 7 + textWidth + 3;
+  const markerRight = reqX + 5 + textWidth + 3;
   const markerBottom = rowY + 2;
 
   doc.line(markerRight, rowY - 6, markerRight, markerBottom);
