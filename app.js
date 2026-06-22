@@ -237,12 +237,12 @@ summaryRows += `
   </tr>
 `;
 
-    summaryData = {
-  gpon: categoryTotals["GPON ONT"]?.current || 0,
-  xgspon: categoryTotals["XGSPON ONT"]?.current || 0,
-  gateway: categoryTotals["Gateway"]?.current || 0,
-  extender: categoryTotals["Extender"]?.current || 0,
-  total: totalCurrent
+   summaryData = {
+  gpon: Math.max(0, categoryTotals["GPON ONT"]?.max - categoryTotals["GPON ONT"]?.current),
+  xgspon: Math.max(0, categoryTotals["XGSPON ONT"]?.max - categoryTotals["XGSPON ONT"]?.current),
+  gateway: Math.max(0, categoryTotals["Gateway"]?.max - categoryTotals["Gateway"]?.current),
+  extender: Math.max(0, categoryTotals["Extender"]?.max - categoryTotals["Extender"]?.current),
+  total: totalCanAdd
 };
     
    if (!summaryRows) {
