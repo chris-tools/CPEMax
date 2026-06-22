@@ -416,6 +416,13 @@ if (item === "TOTAL QTY") {
 
 doc.text(item, reqX + 5, rowY);
 
+// Small L-shaped marker
+const markerRight = reqX + 28;
+const markerBottom = rowY + 2;
+
+doc.line(markerRight, rowY - 6, markerRight, markerBottom);
+doc.line(reqX + 5, markerBottom, markerRight, markerBottom);
+
 doc.setFont("helvetica", "normal");
 
   rowY += rowHeight;
